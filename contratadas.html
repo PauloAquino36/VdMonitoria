@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDMonitoria - Monitorias Contratadas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            margin: 0;
+            padding: 20px 15px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        main {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header a { 
+            text-decoration: none; 
+            color: var(--text-dark); 
+        }
+        h1 { 
+            font-size: 28px; 
+            font-weight: 700; 
+        }
+        h1 span { 
+            color: var(--secondary-color); 
+        }
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .contratada-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .contratada-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .contratada-card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+        .contratada-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .contratada-card p strong {
+            color: #555;
+        }
+        .empty-message {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .header { padding: 0 10px; }
+            h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="header">
+            <a href="home.html"><h1><span>V</span><span>D</span>monitoria</h1></a>
+            <a href="profile.html" style="text-decoration: none; font-weight: 600; color: var(--text-dark);">Voltar ao Perfil</a>
+        </div>
+        
+        <h2 class="page-title">Histórico de Monitorias Contratadas</h2>
+        
+        <div id="contratadas-container"></div>
+    </main>
+
+    <script src="scripts/contratadas.js"></script>
+</body>
+</html>

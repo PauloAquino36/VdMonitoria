@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "nomeCompleto": "João Silva",
+    "email": "joao.silva@example.com",
+    "matricula": "20200001",
+    "curso": "Engenharia de Software",
+    "senha": "senha123",
+    "monitoriasAtuais": [
+      {
+        "idMonitoria": 1,
+        "materia": "Cálculo I",
+        "horario": "Segunda, 14:00-16:00",
+        "modalidade": "Presencial",
+        "valorHora": 50.00,
+        "comprovante": "base64_string_do_pdf_ou_imagem_calculo1",
+        "scores": {
+          "totalAvaliacoes": 45,
+          "numeroAvaliacoes": 10
+        }
+      },
+      {
+        "idMonitoria": 2,
+        "materia": "Álgebra Linear",
+        "horario": "Quarta, 10:00-12:00",
+        "modalidade": "Online",
+        "valorHora": 60.00,
+        "comprovante": "base64_string_do_pdf_ou_imagem_algebra",
+        "scores": {
+          "totalAvaliacoes": 27,
+          "numeroAvaliacoes": 6
+        }
+      }
+    ],
+    "historicoMonitorias": [
+      {
+        "idMonitoria": 3,
+        "materia": "Física I",
+        "periodo": "2023.1",
+        "horario": "Terça, 08:00-10:00",
+        "modalidade": "Presencial",
+        "valorHora": 45.00,
+        "scores": {
+          "totalAvaliacoes": 38,
+          "numeroAvaliacoes": 8
+        }
+      }
+    ],
+    "monitoriasContratadas": [
+      {
+        "idContratacao": 101,
+        "materia": "Programação I",
+        "tutor": "Maria Oliveira",
+        "data": "2025-06-20T16:00:00Z",
+        "valorPago": 110.00
+      },
+      {
+        "idContratacao": 102,
+        "materia": "Estrutura de Dados",
+        "tutor": "Carlos Souza",
+        "data": "2025-05-15T10:00:00Z",
+        "valorPago": 120.00
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nomeCompleto": "Maria Oliveira",
+    "email": "maria.oliveira@example.com",
+    "matricula": "20210005",
+    "curso": "Ciência da Computação",
+    "senha": "outrasenha456",
+    "monitoriasAtuais": [
+      {
+        "idMonitoria": 4,
+        "materia": "Programação I",
+        "horario": "Terça, 16:00-18:00",
+        "modalidade": "Online",
+        "valorHora": 55.00,
+        "comprovante": "base64_string_do_pdf_ou_imagem_prog1",
+        "scores": {
+          "totalAvaliacoes": 50,
+          "numeroAvaliacoes": 10
+        }
+      }
+    ],
+    "historicoMonitorias": [],
+    "monitoriasContratadas": []
+  }
+]

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDMonitoria - Minhas Monitorias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --warning-color: #f39c12;
+            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            margin: 0;
+            padding: 20px 15px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        h1 span {
+            color: var(--secondary-color);
+        }
+        
+        .monitorias-container {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .create-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #e74c3c 0%, #f39c12 100%);
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        .monitoria-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .monitoria-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .monitoria-info {
+            flex-grow: 1;
+        }
+
+        .monitoria-info h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        .monitoria-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .monitoria-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .action-btn.view { background: var(--primary-color); }
+        .action-btn.edit { background: var(--warning-color); }
+        .action-btn.delete { background: var(--secondary-color); }
+        .action-btn svg { width: 20px; height: 20px; fill: white; }
+
+        .empty-message {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .header { padding: 0 10px; }
+            h1 { font-size: 24px; }
+            .create-btn { display: block; width: 100%; }
+            .monitoria-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .monitoria-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="header">
+            <a href="home.html"><h1><span>V</span><span>D</span>monitoria</h1></a>
+            <a href="profile.html" style="text-decoration: none; font-weight: 600; color: var(--text-dark);">Voltar ao Perfil</a>
+        </div>
+        
+        <div class="monitorias-container">
+            <a href="new_monitoria.html" class="create-btn">Cadastrar Nova Monitoria</a>
+            
+            <h2 class="section-title">Minhas Monitorias Atuais</h2>
+            <div id="atuais-container"></div>
+            
+            <h2 class="section-title">Histórico de Monitorias</h2>
+            <div id="historico-container"></div>
+        </div>
+    </main>
+
+    <script src="scripts/my_monitorias.js"></script>
+</body>
+</html>

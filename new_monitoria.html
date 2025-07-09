@@ -1,0 +1,197 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDMonitoria - Cadastrar Nova Monitoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #dfe6e9 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        h1 span {
+            color: #e74c3c;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin: 20px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+        .file-group {
+            position: relative;
+        }
+        .file-group input[type="file"] {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .file-group label {
+            margin-bottom: 8px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #e74c3c 0%, #f39c12 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        @media (max-width: 600px) {
+            .header {
+                padding: 20px;
+            }
+            .form-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            input, select {
+                font-size: 14px;
+            }
+            .submit-btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="home.html"><h1><span>V</span><span>D</span>monitoria</h1></a>
+    </div>
+    <div class="form-container">
+        <h2 style="font-size: 24px; color: #2c3e50; margin-bottom: 30px; text-align: center;">Cadastrar Nova Monitoria</h2>
+        <form>
+            <div class="form-group">
+                <label for="valor-hora">Valor da Hora (R$)</label>
+                <input type="number" id="valor-hora" step="0.01" min="0" placeholder="Ex.: 50.00" required>
+            </div>
+            <div class="form-group">
+                <label for="materia">Matéria</label>
+                <select id="materia" required>
+                    <option value="" disabled selected>Selecione a matéria</option>
+                    <option value="calculo-i">Cálculo I</option>
+                    <option value="algebra-linear">Álgebra Linear</option>
+                    <option value="fisica-i">Física I</option>
+                    <option value="programacao-i">Programação I</option>
+                </select>
+            </div>
+            <div class="form-group file-group">
+                <label for="comprovante">Comprovante de Aprovação (PDF ou Imagem)</label>
+                <input tpe="file" id="comprovante" accept=".pdf,.jpg,.jpeg,.png" required>
+            </div>
+            <div class="form-group">
+                <label for="horario">Horário</label>
+                <input type="text" id="horario" placeholder="Ex.: Segunda, 14:00-16:00" required>
+            </div>
+            <div class="form-group">
+                <label for="modalidade">Modalidade</label>
+                <select id="modalidade" required>
+                    <option value="" disabled selected>Selecione a modalidade</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="online">Online</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Cadastrar Monitoria</button>
+        </form>
+    </div>
+</body>
+</html>
