@@ -2,10 +2,10 @@
   {
     "id": 1,
     "nomeCompleto": "João Silva",
-    "email": "joao.silva@example.com",
+    "email": "adm",
     "matricula": "20200001",
     "curso": "Engenharia de Software",
-    "senha": "senha123",
+    "senha": "adm",
     "monitoriasAtuais": [
       {
         "idMonitoria": 1,
